@@ -1,0 +1,112 @@
+<div class="lesson-page">
+
+  @if (!isFinished()) {
+
+    <header class="lesson-header">
+      <button class="close-btn" (click)="goBack()">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" [style.width.%]="progress()">
+          <div class="progress-glow-head"></div>
+        </div>
+      </div>
+
+      <span class="question-counter">{{ currentIndex() + 1 }} / {{ questions.length }}</span>
+    </header>
+
+    <main class="lesson-main">
+      <div class="question-block">
+        <div class="mascot-bubble-row">
+          <div class="mini-mascot">
+            <i class="fa-solid fa-face-smile-beam"></i>
+          </div>
+          <div class="speech-bubble">
+            <h2>{{ currentQuestion().question }}</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="options-grid">
+        @for (option of currentQuestion().options; track option.letter) {
+          <button
+            class="option-card"
+            [class.selected]="selectedOption() === option.letter && !isChecked()"
+            [class.correct]="isChecked() && option.letter === currentQuestion().correctAnswer"
+            [class.incorrect]="isChecked() && selectedOption() === option.letter && option.letter !== currentQuestion().correctAnswer"
+            (click)="selectOption(option.letter)"
+          >
+            <span class="option-letter">{{ option.letter }}</span>
+            <span class="option-text">{{ option.text }}</span>
+          </button>
+        }
+      </div>
+    </main>
+
+    <div class="bottom-bar" [class.success-state]="isChecked() && isCorrect()" [class.error-state]="isChecked() && !isCorrect()">
+      <div class="bottom-bar-inner">
+
+        @if (isChecked()) {
+          <div class="feedback-content">
+            <div class="feedback-icon">
+              @if (isCorrect()) {
+                <i class="fa-solid fa-circle-check"></i>
+              } @else {
+                <i class="fa-solid fa-circle-xmark"></i>
+              }
+            </div>
+            <div>
+              @if (isCorrect()) {
+                <h3>Excellent Job!</h3>
+                <p>You've got it right.</p>
+              } @else {
+                <h3>Not quite!</h3>
+                <p>Correct answer: Option {{ currentQuestion().correctAnswer }}.</p>
+              }
+            </div>
+          </div>
+        }
+
+        <button
+          class="action-btn"
+          [disabled]="!selectedOption()"
+          (click)="onActionClick()"
+        >
+          {{ isChecked() ? (currentIndex() < questions.length - 1 ? 'Continue' : 'Finish') : 'Check Answer' }}
+        </button>
+
+      </div>
+    </div>
+
+  } @else {
+
+    <!-- Nəticə Ekranı -->
+    <div class="result-page">
+      <div class="result-card">
+        <div class="result-icon" [class.high-score]="finalPercentage() >= 60">
+          <i class="fa-solid fa-trophy"></i>
+        </div>
+
+        <h1 class="result-percentage">{{ finalPercentage() }}%</h1>
+        <p class="result-fraction">{{ correctCount() }} out of {{ questions.length }} correct</p>
+        <p class="result-message">{{ resultMessage() }}</p>
+
+        <div class="result-progress-track">
+          <div class="result-progress-fill" [style.width.%]="finalPercentage()"></div>
+        </div>
+
+        <div class="result-actions">
+          <button class="retry-btn" (click)="retryQuiz()">
+            <i class="fa-solid fa-rotate-right"></i> Try Again
+          </button>
+          <button class="dashboard-btn" (click)="goToDashboard()">
+            Back to Dashboard <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  }
+
+</div>

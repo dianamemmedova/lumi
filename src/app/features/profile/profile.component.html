@@ -1,0 +1,87 @@
+<!-- profile.component.html -->
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+
+<main class="profile-main">
+
+  <!-- Profile Header -->
+  <section class="profile-header">
+    <div class="avatar-wrapper">
+  <app-user-avatar [name]="authService.currentUser()?.name ?? ''" [size]="140"></app-user-avatar>
+  <button class="edit-avatar-btn">
+    <i class="fa-solid fa-pen"></i>
+  </button>
+</div>
+
+    <div class="profile-info">
+      <h1>{{ authService.currentUser()?.name }}</h1>
+      <p class="join-date"><i class="fa-regular fa-calendar"></i> Joined {{ formatJoinDate() }}</p>
+
+      <div class="profile-tags">
+        <span class="tag tag-mint">Level 42</span>
+        <span class="tag tag-neutral">Beta Tester</span>
+      </div>
+    </div>
+
+    <button class="share-btn">Share Profile</button>
+  </section>
+
+  <!-- Stats Grid -->
+  <section class="stats-grid">
+    @for (stat of stats; track stat.label) {
+      <div class="stat-card">
+        <div class="stat-icon" [class]="'icon-' + stat.colorClass">
+          <i class="fa-solid" [class]="stat.icon"></i>
+        </div>
+        <span class="stat-value">{{ stat.value }}</span>
+        <span class="stat-label">{{ stat.label }}</span>
+      </div>
+    }
+  </section>
+
+  <!-- Weekly Activity -->
+  <section class="activity-card">
+    <div class="activity-header">
+      <div>
+        <h2>Weekly Activity</h2>
+        <p>Minutes spent learning per day</p>
+      </div>
+      <div class="activity-total">
+        <span class="total-value">{{ weeklyTotal }}m</span>
+        <span class="total-label"> this week</span>
+      </div>
+    </div>
+
+    <div class="activity-chart">
+      @for (day of weeklyActivity; track day.day) {
+        <div class="chart-column">
+          <div class="chart-bar" [style.height.%]="day.heightPercent"></div>
+          <span class="chart-day-label">{{ day.day }}</span>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Settings -->
+  <section class="settings-section">
+    <h3>Settings</h3>
+
+    <div class="settings-list">
+      @for (item of settingsItems; track item.title) {
+        <button class="setting-row" (click)="handleSettingClick(item)">
+          <div class="setting-left">
+            <div class="setting-icon" [class]="'icon-' + item.colorClass">
+              <i class="fa-solid" [class]="item.icon"></i>
+            </div>
+            <div>
+              <p class="setting-title" [class.error-text]="item.action === 'logout'">{{ item.title }}</p>
+              <p class="setting-desc">{{ item.desc }}</p>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-right chevron"></i>
+        </button>
+      }
+    </div>
+  </section>
+
+</main>

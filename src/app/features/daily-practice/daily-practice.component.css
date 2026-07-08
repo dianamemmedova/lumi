@@ -1,0 +1,333 @@
+/* daily-practice.component.css */
+.practice-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px 80px;
+}
+
+@media (min-width: 1024px) {
+  .practice-main {
+    margin-left: 256px;
+  }
+}
+
+.page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.page-header h1 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  margin: 0 0 6px;
+}
+
+.page-header p {
+  color: var(--on-surface-variant);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.streak-goal-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--surface-container-high);
+  border: 1px solid var(--outline-variant);
+  border-radius: 20px;
+  padding: 16px 20px;
+}
+
+.streak-goal-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.streak-goal-text .label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--on-surface-variant);
+}
+
+.streak-goal-text .value {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.divider {
+  width: 1px;
+  height: 44px;
+  background: var(--outline-variant);
+}
+
+.streak-pills {
+  display: flex;
+  gap: 5px;
+}
+
+.pill {
+  width: 8px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  background: rgba(91,95,239,0.15);
+}
+
+.pill.filled {
+  background: var(--primary);
+}
+
+/* Challenge Card */
+
+.challenge-card {
+  position: relative;
+  background: var(--primary-fixed);
+  border-radius: 32px;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin-bottom: 48px;
+  overflow: hidden;
+}
+
+.challenge-content {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.challenge-badges {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.badge-glass {
+  background: rgba(5,0,108,0.1);
+  color: var(--on-primary-fixed);
+}
+
+.badge-amber {
+  background: var(--tertiary-fixed);
+  color: var(--on-tertiary-fixed);
+}
+
+.challenge-content h2 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--on-primary-fixed);
+  margin: 0 0 16px;
+  line-height: 1.2;
+}
+
+.challenge-content > p {
+  color: var(--on-primary-fixed);
+  opacity: 0.8;
+  max-width: 420px;
+  margin: 0 0 28px;
+}
+
+.challenge-actions {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.start-btn {
+  background: #ffffff;
+  color: var(--primary);
+  border: none;
+  padding: 16px 40px;
+  border-radius: 20px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0px 6px 16px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease;
+}
+
+.start-btn:hover {
+  transform: scale(1.05);
+}
+
+.timer-block {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--on-primary-fixed);
+}
+
+.timer-block i {
+  font-size: 26px;
+}
+
+.timer-label {
+  display: block;
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+.timer-value {
+  display: block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.challenge-trophy {
+  position: relative;
+  z-index: 1;
+  font-size: 140px;
+  color: var(--tertiary-fixed-dim);
+  filter: drop-shadow(0 0 30px rgba(249,189,34,0.4));
+  flex-shrink: 0;
+}
+
+/* Skill Modules */
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.section-header h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.section-header a {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 12.5px;
+  text-decoration: none;
+}
+
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.module-card {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--outline-variant);
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: var(--shadow-tactile);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.module-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-tactile-hover);
+}
+
+.module-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.module-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.icon-primary { background: var(--primary-fixed); color: var(--on-primary-fixed); }
+.icon-secondary { background: var(--secondary-container); color: var(--on-secondary-container); }
+.icon-tertiary { background: var(--tertiary-fixed); color: var(--on-tertiary-fixed); }
+.icon-error { background: var(--error-container); color: var(--on-error-container); }
+.icon-outline { background: var(--surface-container-highest); color: var(--on-surface-variant); }
+
+.module-xp {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--on-surface-variant);
+}
+
+.module-card h4 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.module-card p {
+  font-size: 13px;
+  color: var(--on-surface-variant);
+  margin: 0 0 20px;
+  line-height: 1.5;
+}
+
+.module-progress-track {
+  width: 100%;
+  height: 8px;
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.module-progress-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+}
+
+.bg-outline { background: var(--outline); }
+
+@media (max-width: 900px) {
+  .challenge-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  .challenge-actions {
+    justify-content: center;
+  }
+  .modules-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .modules-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,30 @@
+<!-- sidebar.component.html -->
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <h2 class="sidebar-logo">Lumi</h2>
+    <p class="sidebar-tag">Skill Master</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a routerLink="/dashboard" routerLinkActive="active">
+      <i class="fa-solid fa-table-columns"></i>
+      <span>Dashboard</span>
+    </a>
+    <a routerLink="/course-detail" routerLinkActive="active">
+      <i class="fa-solid fa-book-open"></i>
+      <span>Curriculum</span>
+    </a>
+    <a routerLink="/achievements" routerLinkActive="active">
+      <i class="fa-solid fa-medal"></i>
+      <span>Achievements</span>
+    </a>
+    <a routerLink="/profile" routerLinkActive="active">
+      <i class="fa-solid fa-gear"></i>
+      <span>Settings</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <button class="upgrade-btn">Upgrade to Pro</button>
+  </div>
+</aside>

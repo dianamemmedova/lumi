@@ -1,0 +1,55 @@
+<!-- onboarding.component.html -->
+<div class="onboarding-page">
+
+  <header class="progress-header">
+    <div class="progress-dots">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </header>
+
+  <main class="onboarding-main">
+
+    <section class="hero-section">
+      <div class="mascot-wrapper">
+        <div class="mascot-glow"></div>
+        <div class="mascot">
+          <i class="fa-solid fa-face-smile-beam"></i>
+        </div>
+      </div>
+
+      <h1 class="onboarding-title">What do you want to learn?</h1>
+      <p class="onboarding-subtitle">Pick a category to start your journey. You can always explore other skills later in your dashboard.</p>
+    </section>
+
+    <section class="category-grid">
+      @for (cat of categories; track cat.id) {
+        <button
+          class="category-card"
+          [class.selected]="selectedCategory() === cat.id"
+          (click)="selectCategory(cat.id)"
+        >
+          <div class="category-icon" [class]="'icon-' + cat.colorClass">
+            <i class="fa-solid" [class]="cat.icon"></i>
+          </div>
+          <span class="category-name" [class]="'text-' + cat.colorClass">{{ cat.name }}</span>
+        </button>
+      }
+    </section>
+
+    <div class="onboarding-actions">
+      <button class="continue-btn" (click)="continue()">
+        CONTINUE <i class="fa-solid fa-arrow-right"></i>
+      </button>
+      <p class="step-text">Step 1 of 4</p>
+    </div>
+
+  </main>
+
+  <footer class="onboarding-footer">
+    <p>© 2026 Lumi Learning. Keep glowing!</p>
+  </footer>
+
+</div>

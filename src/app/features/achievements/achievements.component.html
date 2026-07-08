@@ -1,0 +1,77 @@
+<!-- achievements.component.html -->
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+
+<main class="achievements-main">
+
+  <!-- Progress Summary -->
+  <section class="progress-summary">
+    <div class="progress-ring-wrapper">
+      <svg class="progress-ring-svg" viewBox="0 0 100 100">
+        <circle class="ring-track" cx="50" cy="50" r="42" />
+        <circle class="ring-value" cx="50" cy="50" r="42" [style.stroke-dashoffset]="ringOffset()" />
+      </svg>
+      <div class="ring-label">{{ percent }}%</div>
+    </div>
+
+    <div class="progress-text">
+      <h1>{{ unlockedCount }} of {{ totalCount }} badges unlocked</h1>
+      <p>You're making incredible progress, Lumi master! Complete 5 more challenges to unlock the next Master Tier badge and boost your global ranking.</p>
+
+      <div class="mini-badges">
+        <span class="mini-badge amber"><i class="fa-solid fa-fire"></i> 7 Day Streak</span>
+        <span class="mini-badge mint"><i class="fa-solid fa-bolt"></i> Swift Learner</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Badge Grid -->
+  <section class="badge-section">
+    <div class="section-header">
+      <h3>Your Collection</h3>
+    </div>
+
+    <div class="badge-grid">
+      @for (badge of badges; track badge.id) {
+        <div class="badge-card" [class.locked]="!badge.unlocked">
+          <div class="badge-icon" [class]="'bg-' + badge.colorClass">
+            <i class="fa-solid" [class]="badge.icon"></i>
+          </div>
+          <p class="badge-name">{{ badge.name }}</p>
+          <p class="badge-level" [class.italic]="!badge.unlocked">{{ badge.level }}</p>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Milestones -->
+  <section class="milestones-grid">
+    <div class="milestone-hero">
+      <div class="milestone-content">
+        <span class="milestone-eyebrow">Next Milestone</span>
+        <h2>The Century Club</h2>
+        <p>Complete 100 lessons to earn the legendary Platinum Lumi badge and unlock the exclusive "Neon" profile theme.</p>
+        <div class="milestone-progress-track">
+          <div class="milestone-progress-fill" style="width: 82%"></div>
+        </div>
+        <p class="milestone-progress-text">82 / 100 Lessons</p>
+      </div>
+      <div class="milestone-icon">
+        <i class="fa-solid fa-medal"></i>
+      </div>
+    </div>
+
+    <div class="rank-card">
+      <div class="rank-card-header">
+        <div class="rank-icon"><i class="fa-solid fa-arrow-trend-up"></i></div>
+        <h4>Global Rank</h4>
+      </div>
+      <div class="rank-position">
+        <span>Position</span>
+        <span class="rank-number-big">#1,402</span>
+      </div>
+      <p class="rank-note">Top 5% of all Lumi students this month!</p>
+    </div>
+  </section>
+
+</main>

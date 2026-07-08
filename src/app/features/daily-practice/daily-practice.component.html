@@ -1,0 +1,81 @@
+<!-- daily-practice.component.html -->
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+
+<main class="practice-main">
+
+  <div class="page-header">
+    <div>
+      <h1>Daily Practice</h1>
+      <p><i class="fa-regular fa-calendar"></i> {{ today }}</p>
+    </div>
+
+    <div class="streak-goal-card">
+      <div class="streak-goal-text">
+        <span class="label">Streak Goal</span>
+        <span class="value">3 Days Left</span>
+      </div>
+      <div class="divider"></div>
+      <div class="streak-pills">
+        @for (filled of streakPills; track $index) {
+          <div class="pill" [class.filled]="filled"></div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Daily Challenge -->
+  <section class="challenge-card">
+    <div class="challenge-content">
+      <div class="challenge-badges">
+        <span class="badge badge-glass"><i class="fa-solid fa-star"></i> DAILY CHALLENGE</span>
+        <span class="badge badge-amber">HARD • 50 XP</span>
+      </div>
+
+      <h2>Mastering Dynamic<br />Logic Gates</h2>
+      <p>Solve today's most difficult puzzle to unlock the "Spark" achievement and boost your weekly rank.</p>
+
+      <div class="challenge-actions">
+        <button class="start-btn">Start Challenge</button>
+        <div class="timer-block">
+          <i class="fa-regular fa-clock"></i>
+          <div>
+            <span class="timer-label">ENDS IN</span>
+            <span class="timer-value">{{ countdown() }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="challenge-trophy">
+      <i class="fa-solid fa-trophy"></i>
+    </div>
+  </section>
+
+  <!-- Skill Modules -->
+  <section class="modules-section">
+    <div class="section-header">
+      <h3>Skill Modules</h3>
+      <a href="#">View All</a>
+    </div>
+
+    <div class="modules-grid">
+      @for (mod of skillModules; track mod.id) {
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-icon" [class]="'icon-' + mod.colorClass">
+              <i class="fa-solid" [class]="mod.icon"></i>
+            </div>
+            <span class="module-xp">{{ mod.xp }} XP</span>
+          </div>
+          <h4>{{ mod.title }}</h4>
+          <p>{{ mod.desc }}</p>
+          <div class="module-progress-track">
+            <div class="module-progress-fill" [class]="'bg-' + mod.colorClass" [style.width.%]="mod.progress"></div>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+</main>

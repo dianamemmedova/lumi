@@ -1,0 +1,67 @@
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+
+<main class="leaderboard-main">
+
+  <section class="title-section">
+    <h1>League Rankings</h1>
+    <p>You're currently in the <span class="league-name">Amethyst League</span></p>
+
+    <div class="tab-switcher">
+      <button [class.active]="activeTab() === 'friends'" (click)="setTab('friends')">Friends</button>
+      <button [class.active]="activeTab() === 'global'" (click)="setTab('global')">Global</button>
+      <button [class.active]="activeTab() === 'weekly'" (click)="setTab('weekly')">Weekly</button>
+    </div>
+  </section>
+
+  <!-- Podium -->
+  <section class="podium">
+    @for (person of podium; track person.rank) {
+      <div class="podium-item" [class]="'place-' + person.rank">
+        <div class="podium-avatar-wrapper">
+          <i class="podium-crown" [class]="person.rank === 1 ? 'fa-solid fa-crown gold' : 'fa-solid fa-trophy'"></i>
+          <app-user-avatar [name]="person.name" [size]="person.rank === 1 ? 108 : 80"></app-user-avatar>
+        </div>
+        <p class="podium-name">{{ person.name }}</p>
+        <p class="podium-xp">{{ person.xp | number }} XP</p>
+        <div class="podium-bar">
+          <span>{{ person.rank }}</span>
+        </div>
+      </div>
+    }
+  </section>
+
+  <!-- Ranked List -->
+  <section class="ranked-list">
+    @for (person of rankedList; track person.id) {
+      <div class="rank-row" [class.current-user]="person.isCurrentUser">
+        <div class="rank-left">
+          <span class="rank-number">{{ person.rank }}</span>
+          <app-user-avatar [name]="person.name" [size]="48"></app-user-avatar>
+          <div>
+            <p class="rank-name">{{ person.name }}</p>
+            <div class="rank-trend" [class]="'trend-' + person.trend">
+              @if (person.trend === 'up') {
+                <i class="fa-solid fa-arrow-trend-up"></i>
+                <span>+{{ person.trendValue }} positions</span>
+              } @else if (person.trend === 'down') {
+                <i class="fa-solid fa-arrow-trend-down"></i>
+                <span>-{{ person.trendValue }} position</span>
+              } @else {
+                <i class="fa-solid fa-minus"></i>
+                <span>Holding steady</span>
+              }
+            </div>
+          </div>
+        </div>
+        <div class="rank-right">
+          <p class="rank-xp">{{ person.xp | number }} XP</p>
+          @if (person.isCurrentUser) {
+            <p class="promotion-tag">Promotion Zone</p>
+          }
+        </div>
+      </div>
+    }
+  </section>
+
+</main>

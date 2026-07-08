@@ -1,0 +1,10 @@
+<!-- user-avatar.component.html -->
+<div
+  class="user-avatar"
+  [style.width.px]="size()"
+  [style.height.px]="size()"
+  [style.background]="backgroundColor()"
+  [style.font-size.px]="size() * 0.4"
+>
+  {{ initials() }}
+</div>

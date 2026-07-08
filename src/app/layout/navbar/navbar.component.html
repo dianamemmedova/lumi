@@ -1,0 +1,27 @@
+<!-- navbar.component.html -->
+<header class="navbar">
+  <div class="navbar-inner">
+    <div class="navbar-left">
+      <span class="logo">Lumi</span>
+      <nav class="nav-links">
+        <a routerLink="/dashboard" routerLinkActive="active">Home</a>
+        <a routerLink="/course-detail" routerLinkActive="active">Explore</a>
+        <a routerLink="/daily-practice" routerLinkActive="active">Practice</a>
+        <a routerLink="/leaderboard" routerLinkActive="active">Leaderboard</a>
+      </nav>
+    </div>
+
+    <div class="navbar-right">
+      <div class="streak-badge">
+        <i class="fa-solid fa-fire"></i>
+        <span>{{ authService.currentUser()?.streak ?? 0 }}</span>
+      </div>
+      <a routerLink="/achievements" class="icon-btn">
+        <i class="fa-solid fa-award"></i>
+      </a>
+      <a routerLink="/profile" class="avatar-link">
+        <app-user-avatar [name]="authService.currentUser()?.name ?? ''" [size]="40"></app-user-avatar>
+      </a>
+    </div>
+  </div>
+</header>

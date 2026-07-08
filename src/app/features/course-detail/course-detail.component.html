@@ -1,0 +1,130 @@
+<!-- course-detail.component.html -->
+<app-navbar></app-navbar>
+
+<div class="course-detail-page">
+
+  <section class="course-hero">
+    <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=1400&q=80" alt="course hero" class="hero-bg" />
+    <div class="hero-gradient"></div>
+
+    <div class="hero-content">
+      <div class="hero-tags">
+        <span class="tag tag-glass">Design Essentials</span>
+        <span class="tag tag-amber">Intermediate</span>
+      </div>
+      <h1>UX Design Fundamentals</h1>
+      <div class="hero-meta">
+        <span><i class="fa-solid fa-star"></i> 4.9 <span class="meta-sub">(12,403 Students)</span></span>
+        <span><i class="fa-regular fa-clock"></i> 12h 45m</span>
+        <span><i class="fa-solid fa-list"></i> 42 Lessons</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="tab-switcher">
+    <button [class.active]="activeTab() === 'overview'" (click)="setTab('overview')">Overview</button>
+    <button [class.active]="activeTab() === 'curriculum'" (click)="setTab('curriculum')">Curriculum</button>
+    <button [class.active]="activeTab() === 'reviews'" (click)="setTab('reviews')">Reviews</button>
+  </div>
+
+  <div class="content-grid">
+
+    <div class="main-column">
+
+      @if (activeTab() === 'overview') {
+        <div class="tab-content">
+          <h2>About this course</h2>
+          <p class="about-text">Master the core principles of User Experience design. In this comprehensive course, you'll journey through the entire design process from initial user research and persona creation to high-fidelity prototyping and usability testing.</p>
+
+          <div class="feature-grid">
+            <div class="feature-card">
+              <i class="fa-solid fa-brain"></i>
+              <h3>User Research</h3>
+              <p>Learn to conduct interviews and synthesize data into actionable insights.</p>
+            </div>
+            <div class="feature-card">
+              <i class="fa-solid fa-pen-ruler"></i>
+              <h3>Wireframing</h3>
+              <p>Master the art of skeletal layouts and information architecture.</p>
+            </div>
+          </div>
+        </div>
+      }
+
+      @if (activeTab() === 'curriculum') {
+        <div class="tab-content">
+          <h2>Course Modules</h2>
+
+          @for (module of modules; track module.id) {
+            <div class="module-accordion">
+              <button class="module-header" (click)="toggleModule(module)">
+                <div class="module-header-left">
+                  <span class="module-number">{{ module.id }}</span>
+                  <div>
+                    <h4>{{ module.title }}</h4>
+                    <p>{{ module.lessonCount }} Lessons • {{ module.duration }}</p>
+                  </div>
+                </div>
+                <i class="fa-solid fa-chevron-down" [class.rotated]="module.expanded"></i>
+              </button>
+
+              @if (module.expanded) {
+                <div class="module-lessons">
+                  @for (lesson of module.lessons; track lesson.id) {
+                    <div class="lesson-row" [class]="'status-' + lesson.status">
+                      @if (lesson.status === 'completed') {
+                        <i class="fa-solid fa-circle-check"></i>
+                      } @else if (lesson.status === 'active') {
+                        <i class="fa-solid fa-circle-play"></i>
+                      } @else {
+                        <i class="fa-solid fa-lock"></i>
+                      }
+                      <span class="lesson-title">{{ lesson.title }}</span>
+                      <span class="lesson-duration">{{ lesson.duration }}</span>
+                    </div>
+                  }
+                </div>
+              }
+            </div>
+          }
+        </div>
+      }
+
+      @if (activeTab() === 'reviews') {
+        <div class="tab-content">
+          <h2>Student Feedback</h2>
+          <div class="review-card">
+            <img src="https://i.pravatar.cc/60?img=12" alt="reviewer" class="review-avatar" />
+            <div>
+              <div class="review-header">
+                <span class="review-name">Alex Rivera</span>
+                <span class="review-stars">★★★★★</span>
+              </div>
+              <p class="review-text">"This course changed the way I think about interfaces. The modules are bite-sized but packed with value. Highly recommended!"</p>
+            </div>
+          </div>
+        </div>
+      }
+
+    </div>
+
+    <aside class="sidebar-card">
+      <div class="price-row">
+        <span class="price">$49.99</span>
+        <span class="old-price">$129.99</span>
+      </div>
+      <div class="discount-badge">65% OFF Limited Time Offer</div>
+
+      <ul class="perks-list">
+        <li><i class="fa-solid fa-shield-halved"></i> Lifetime access & updates</li>
+        <li><i class="fa-solid fa-file-lines"></i> Downloadable resources</li>
+        <li><i class="fa-solid fa-award"></i> Shareable certificate</li>
+      </ul>
+
+      <button class="buy-btn" [routerLink]="['/lesson']">Buy Now</button>
+      <p class="guarantee-text">30-Day Money Back Guarantee</p>
+    </aside>
+
+  </div>
+
+</div>
