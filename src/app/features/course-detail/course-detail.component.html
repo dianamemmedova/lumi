@@ -127,4 +127,52 @@
 
   </div>
 
+  <!-- Related Courses Slider -->
+  <section class="related-slider-section" style="margin-top: 40px;">
+    <div class="related-header">
+      <h2>You Might Also Like</h2>
+      <div class="slider-controls">
+        <button class="slider-arrow" (click)="prevSlide()" aria-label="Previous">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button class="slider-arrow" (click)="nextSlide()" aria-label="Next">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="slider-viewport">
+      <div class="slider-track" [style.transform]="'translateX(-' + (currentSlide() * 100) + '%)'">
+        @for (course of relatedCourses; track course.id) {
+          <div class="slide">
+            <div class="slide-card">
+              <div class="slide-image-wrapper">
+                <img [src]="course.image" [alt]="course.title" />
+                <span class="slide-level-badge" [class]="'bg-' + course.colorClass">{{ course.level }}</span>
+              </div>
+              <div class="slide-content">
+                <h3>{{ course.title }}</h3>
+                <p>{{ course.description }}</p>
+                <button class="slide-cta" [class]="'text-' + course.colorClass">
+                  Explore Course <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="slider-dots">
+      @for (course of relatedCourses; track course.id; let i = $index) {
+        <button
+          class="dot"
+          [class.active]="currentSlide() === i"
+          (click)="goToSlide(i)"
+          [attr.aria-label]="'Go to slide ' + (i + 1)"
+        ></button>
+      }
+    </div>
+  </section>
+
 </div>

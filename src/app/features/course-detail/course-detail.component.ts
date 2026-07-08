@@ -1,4 +1,3 @@
-// course-detail.component.ts
 import { Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NavbarComponent } from '../../layout/navbar/navbar.component';
@@ -17,6 +16,15 @@ interface Module {
   duration: string;
   lessons: Lesson[];
   expanded: boolean;
+}
+
+interface RelatedCourse {
+  id: number;
+  title: string;
+  description: string;
+  level: string;
+  image: string;
+  colorClass: string;
 }
 
 @Component({
@@ -59,6 +67,47 @@ export class CourseDetailComponent {
       ]
     }
   ];
+
+  relatedCourses: RelatedCourse[] = [
+    {
+      id: 1,
+      title: 'Advanced Interaction Design',
+      description: 'Learn to build micro-interactions that delight users and improve engagement.',
+      level: 'Intermediate',
+      image: 'https://images.unsplash.com/photo-1587440871875-191322ee64b0?auto=format&fit=crop&w=800&q=80',
+      colorClass: 'primary'
+    },
+    {
+      id: 2,
+      title: 'Design Systems Mastery',
+      description: 'Build scalable, consistent design systems used by top product teams.',
+      level: 'Advanced',
+      image: 'https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=800&q=80',
+      colorClass: 'secondary'
+    },
+    {
+      id: 3,
+      title: 'Prototyping with Motion',
+      description: 'Bring your designs to life with physics-based animation and transitions.',
+      level: 'Beginner',
+      image: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=800&q=80',
+      colorClass: 'tertiary'
+    }
+  ];
+
+  currentSlide = signal(0);
+
+  nextSlide() {
+    this.currentSlide.update(i => (i + 1) % this.relatedCourses.length);
+  }
+
+  prevSlide() {
+    this.currentSlide.update(i => (i - 1 + this.relatedCourses.length) % this.relatedCourses.length);
+  }
+
+  goToSlide(index: number) {
+    this.currentSlide.set(index);
+  }
 
   toggleModule(module: Module) {
     module.expanded = !module.expanded;
