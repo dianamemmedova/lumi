@@ -1,0 +1,66 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #4143d5;
+  --primary-container: #5b5fef;
+  --on-primary-container: #f9f6ff;
+  --primary-fixed: #e1e0ff;
+  --on-primary-fixed: #05006c;
+
+  --secondary: #006b5f;
+  --secondary-container: #62fae3;
+  --on-secondary-container: #007165;
+  --secondary-fixed-dim: #3cddc7;
+
+  --tertiary: #735500;
+  --tertiary-container: #916c00;
+  --tertiary-fixed: #ffdf9f;
+  --tertiary-fixed-dim: #f9bd22;
+  --on-tertiary-fixed: #261a00;
+
+  --error: #ba1a1a;
+  --error-container: #ffdad6;
+  --on-error-container: #93000a;
+
+  --background: #fcf8ff;
+  --surface: #fcf8ff;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f5f2ff;
+  --surface-container: #efecfc;
+  --surface-container-high: #e9e6f7;
+  --surface-container-highest: #e3e0f1;
+  --surface-variant: #e3e0f1;
+
+  --on-surface: #1b1a26;
+  --on-surface-variant: #464555;
+  --outline: #767586;
+  --outline-variant: #c6c5d7;
+
+  --radius-lg: 0.75rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+
+  --shadow-tactile: 0px 4px 12px rgba(91, 95, 239, 0.08);
+  --shadow-tactile-hover: 0px 12px 32px rgba(91, 95, 239, 0.15);
+}
+
+html, body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: var(--background);
+  color: var(--on-surface);
+  -webkit-font-smoothing: antialiased;
+}
+
+.tactile-card {
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: var(--shadow-tactile);
+}
+
+.tactile-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-tactile-hover);
+}
