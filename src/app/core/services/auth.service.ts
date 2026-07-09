@@ -40,9 +40,26 @@ export class AuthService {
   }
 
   private loadSession(): User | null {
-    const stored = localStorage.getItem(SESSION_KEY);
-    return stored ? JSON.parse(stored) : null;
+  const stored = localStorage.getItem(SESSION_KEY);
+  if (!stored) return null;
+
+  const user = JSON.parse(stored);
+  return this.normalizeUser(user);
   }
+  
+  private normalizeUser(user: any): User {
+  return {
+    ...user,
+    coursesCount: user.coursesCount ?? 0,
+    learningMinutes: user.learningMinutes ?? 0,
+    dailyGoals: user.dailyGoals ?? {
+      focusMinutes: 0,
+      lessonsCompleted: 0,
+      quizzesCompleted: 0,
+      streakXp: 0
+    }
+  };
+}
 
   private getAllUsers(): User[] {
     const stored = localStorage.getItem(STORAGE_KEY);
@@ -86,22 +103,23 @@ export class AuthService {
     return { success: true, message: 'Account created successfully!' };
   }
 
-  login(email: string, password: string): { success: boolean; message: string } {
-    const users = this.getAllUsers();
-    const user = users.find(u => u.email.toLowerCase() === email.toLowerCase());
+ login(email: string, password: string): { success: boolean; message: string } {
+  const users = this.getAllUsers();
+  const user = users.find(u => u.email.toLowerCase() === email.toLowerCase());
 
-    if (!user) {
-      return { success: false, message: 'No account found with this email.' };
-    }
-
-    if (user.password !== password) {
-      return { success: false, message: 'Incorrect password.' };
-    }
-
-    this.setSession(user);
-    this.isNewUser.set(false); // Login edən istifadəçi "yeni" sayılmır
-    return { success: true, message: 'Welcome back!' };
+  if (!user) {
+    return { success: false, message: 'No account found with this email.' };
   }
+
+  if (user.password !== password) {
+    return { success: false, message: 'Incorrect password.' };
+  }
+
+  const normalizedUser = this.normalizeUser(user);
+  this.setSession(normalizedUser);
+  this.isNewUser.set(false);
+  return { success: true, message: 'Welcome back!' };
+}
 
   logout() {
     localStorage.removeItem(SESSION_KEY);

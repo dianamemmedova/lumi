@@ -43,10 +43,9 @@ export class DashboardComponent implements OnInit {
   });
 
   hasStartedLearning = computed(() => {
-    const user = this.authService.currentUser();
-    return !!user && (user.totalXp > 0 || user.dailyGoals.lessonsCompleted > 0);
-  });
-
+  const user = this.authService.currentUser();
+  return !!user && (user.totalXp > 0 || (user.dailyGoals?.lessonsCompleted ?? 0) > 0);
+});
   dailyGoals = computed(() => {
     const goals = this.authService.currentUser()?.dailyGoals ?? {
       focusMinutes: 0, lessonsCompleted: 0, quizzesCompleted: 0, streakXp: 0

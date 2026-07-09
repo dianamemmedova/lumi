@@ -1,69 +1,67 @@
-<!-- dashboard.component.html -->
 <app-navbar></app-navbar>
 <app-sidebar></app-sidebar>
 
 <main class="dashboard-main">
 
-<header class="dashboard-header">
-  <h1>{{ greetingTitle() }} <i class="fa-solid fa-hand-peace"></i></h1>
-  <p>{{ greetingSubtitle() }}</p>
-</header>
+  <header class="dashboard-header">
+    <h1>{{ greetingTitle() }} <i class="fa-solid fa-hand-peace"></i></h1>
+    <p>{{ greetingSubtitle() }}</p>
+  </header>
 
-@if (hasStartedLearning()) {
-   <section class="continue-learning" [routerLink]="['/lesson']">
-    <div class="cl-image-wrapper">
-      <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=600&q=80" alt="course" />
-      <div class="cl-overlay"></div>
-      <div class="cl-level-badge">
-        <i class="fa-solid fa-circle-play"></i> Level 4
-      </div>
-    </div>
-
-    <div class="cl-content">
-      <span class="cl-eyebrow">CONTINUE LEARNING</span>
-      <h2 class="cl-title">Mastering UI Motion Design</h2>
-      <p class="cl-desc">Module 3: Creating rewarding interaction loops using physics-based transitions and feedback.</p>
-
-      <div class="cl-progress">
-        <div class="cl-progress-labels">
-          <span>Course Progress</span>
-          <span class="cl-progress-percent">68%</span>
-        </div>
-        <div class="cl-progress-track">
-          <div class="cl-progress-fill" style="width: 68%"></div>
+  <!-- Continue Learning / Empty State -->
+  @if (hasStartedLearning()) {
+    <section class="continue-learning" [routerLink]="['/lesson']">
+      <div class="cl-image-wrapper">
+        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=600&q=80" alt="course" />
+        <div class="cl-overlay"></div>
+        <div class="cl-level-badge">
+          <i class="fa-solid fa-circle-play"></i> Level 4
         </div>
       </div>
 
-      <div class="cl-actions">
-        <button class="cl-resume-btn"><i class="fa-solid fa-play"></i> Resume</button>
-        <button class="cl-details-btn">COURSE DETAILS</button>
+      <div class="cl-content">
+        <span class="cl-eyebrow">CONTINUE LEARNING</span>
+        <h2 class="cl-title">Mastering UI Motion Design</h2>
+        <p class="cl-desc">Module 3: Creating rewarding interaction loops using physics-based transitions and feedback.</p>
+
+        <div class="cl-progress">
+          <div class="cl-progress-labels">
+            <span>Course Progress</span>
+            <span class="cl-progress-percent">68%</span>
+          </div>
+          <div class="cl-progress-track">
+            <div class="cl-progress-fill" style="width: 68%"></div>
+          </div>
+        </div>
+
+        <div class="cl-actions">
+          <button class="cl-resume-btn"><i class="fa-solid fa-play"></i> Resume</button>
+          <button class="cl-details-btn">COURSE DETAILS</button>
+        </div>
       </div>
-    </div>
-  </section>
-} @else {
-  <section class="empty-state-card" [routerLink]="['/course-detail']">
-    <div class="empty-state-icon">
-      <i class="fa-solid fa-graduation-cap"></i>
-    </div>
-    <h2>Start Your First Course</h2>
-    <p>You haven't started learning yet. Explore our courses and begin your journey today!</p>
-    <button class="cl-resume-btn">
-      <i class="fa-solid fa-compass"></i> Explore Courses
-    </button>
-  </section>
-}
-
-
+    </section>
+  } @else {
+    <section class="empty-state-card" [routerLink]="['/course-detail']">
+      <div class="empty-state-icon">
+        <i class="fa-solid fa-graduation-cap"></i>
+      </div>
+      <h2>Start Your First Course</h2>
+      <p>You haven't started learning yet. Explore our courses below and begin your journey today!</p>
+      <button class="cl-resume-btn">
+        <i class="fa-solid fa-compass"></i> Explore Courses
+      </button>
+    </section>
+  }
 
   <!-- Daily Goals -->
   <section class="section">
     <div class="section-header">
       <h3>Daily Goals</h3>
-      <button class="view-all-link">VIEW ALL</button>
+      <button type="button" class="view-all-link">VIEW ALL</button>
     </div>
 
     <div class="goals-grid">
-  @for (goal of dailyGoals(); track goal.label){
+      @for (goal of dailyGoals(); track goal.label) {
         <div class="goal-card">
           <div class="goal-ring-wrapper">
             <svg class="goal-ring" viewBox="0 0 96 96">
@@ -86,7 +84,7 @@
     </div>
   </section>
 
-  <!-- Your Courses -->
+  <!-- Your Courses (kataloq - hər zaman göstərilir) -->
   <section class="section">
     <div class="section-header">
       <h3>Your Courses</h3>
@@ -111,7 +109,7 @@
     </div>
   </section>
 
-  <!-- Recommended -->
+  <!-- Recommended (kataloq - hər zaman göstərilir) -->
   <section class="section">
     <div class="section-header">
       <h3>Recommended for You</h3>
