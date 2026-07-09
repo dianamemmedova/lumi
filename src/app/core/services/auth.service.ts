@@ -1,5 +1,11 @@
 import { Injectable, signal, computed } from '@angular/core';
-import { Router } from '@angular/router';
+
+export interface DailyGoals {
+  focusMinutes: number;
+  lessonsCompleted: number;
+  quizzesCompleted: number;
+  streakXp: number;
+}
 
 export interface User {
   id: string;
@@ -9,6 +15,9 @@ export interface User {
   joinDate: string;
   streak: number;
   totalXp: number;
+  coursesCount: number;
+  learningMinutes: number;
+  dailyGoals: DailyGoals;
 }
 
 const STORAGE_KEY = 'lumi-users';
@@ -18,10 +27,17 @@ const SESSION_KEY = 'lumi-current-user';
   providedIn: 'root'
 })
 export class AuthService {
-  private router = new Router();
-
   currentUser = signal<User | null>(this.loadSession());
   isLoggedIn = computed(() => this.currentUser() !== null);
+
+  // Yalnız qeydiyyatdan dərhal sonra true olur, Dashboard-a bir dəfə
+  // "Welcome" göstərəndən sonra false-a keçir
+  isNewUser = signal(false);
+
+
+  constructor() {
+    this.seedDemoAccount();
+  }
 
   private loadSession(): User | null {
     const stored = localStorage.getItem(SESSION_KEY);
@@ -52,12 +68,20 @@ export class AuthService {
       joinDate: new Date().toISOString(),
       streak: 0,
       totalXp: 0,
-      
+      coursesCount: 0,
+      learningMinutes: 0,
+      dailyGoals: {
+        focusMinutes: 0,
+        lessonsCompleted: 0,
+        quizzesCompleted: 0,
+        streakXp: 0
+      }
     };
 
     users.push(newUser);
     this.saveAllUsers(users);
     this.setSession(newUser);
+    this.isNewUser.set(true);
 
     return { success: true, message: 'Account created successfully!' };
   }
@@ -75,12 +99,48 @@ export class AuthService {
     }
 
     this.setSession(user);
+    this.isNewUser.set(false); // Login edən istifadəçi "yeni" sayılmır
     return { success: true, message: 'Welcome back!' };
   }
 
   logout() {
     localStorage.removeItem(SESSION_KEY);
     this.currentUser.set(null);
+    this.isNewUser.set(false);
+  }
+
+  seedDemoAccount() {
+  const users = this.getAllUsers();
+  const demoExists = users.some(u => u.email === 'demo@lumi.com');
+
+  if (!demoExists) {
+    const demoUser: User = {
+      id: 'demo-user-001',
+      name: 'Demo User',
+      email: 'demo@lumi.com',
+      password: 'demo123',
+      joinDate: new Date('2026-01-15').toISOString(),
+      streak: 12,
+      totalXp: 4820,
+      coursesCount: 8,
+      learningMinutes: 1440,
+      dailyGoals: {
+        focusMinutes: 45,
+        lessonsCompleted: 2,
+        quizzesCompleted: 100,
+        streakXp: 900
+      }
+    };
+
+    users.push(demoUser);
+    this.saveAllUsers(users);
+  }
+}
+
+  // Dashboard bunu bir dəfə çağırıb "Welcome" mesajını göstərəndən sonra
+  // bayrağı sıfırlayır ki, bir də görünməsin
+  markUserAsWelcomed() {
+    this.isNewUser.set(false);
   }
 
   private setSession(user: User) {

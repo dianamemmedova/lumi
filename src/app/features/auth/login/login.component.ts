@@ -32,4 +32,11 @@ export class LoginComponent {
       this.errorMessage.set(result.message);
     }
   }
+
+  loginAsDemo() {
+    const result = this.authService.login('demo@lumi.com', 'demo123');
+    if (result.success) {
+      this.router.navigate(['/dashboard']);
+    }
+  }
 }

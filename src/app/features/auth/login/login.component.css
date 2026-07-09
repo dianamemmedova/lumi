@@ -129,3 +129,43 @@
   font-weight: 600;
   text-decoration: none;
 }
+
+.demo-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+  color: var(--on-surface-variant);
+  font-size: 12px;
+}
+
+.demo-divider::before,
+.demo-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--outline-variant);
+}
+
+.demo-btn {
+  width: 100%;
+  background: var(--surface-container-high);
+  color: var(--on-surface);
+  border: 1.5px dashed var(--outline-variant);
+  padding: 13px;
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.demo-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: rgba(91, 95, 239, 0.05);
+}

@@ -4,13 +4,13 @@
 
 <main class="dashboard-main">
 
-  <header class="dashboard-header">
-    <h1>Welcome back, {{ authService.currentUser()?.name }}! <i class="fa-solid fa-hand-peace"></i></h1>
-    <p>You're doing great! You've learned 3 new skills this week.</p>
-  </header>
+<header class="dashboard-header">
+  <h1>{{ greetingTitle() }} <i class="fa-solid fa-hand-peace"></i></h1>
+  <p>{{ greetingSubtitle() }}</p>
+</header>
 
-  <!-- Continue Learning Hero -->
-  <section class="continue-learning" [routerLink]="['/lesson']">
+@if (hasStartedLearning()) {
+   <section class="continue-learning" [routerLink]="['/lesson']">
     <div class="cl-image-wrapper">
       <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=600&q=80" alt="course" />
       <div class="cl-overlay"></div>
@@ -40,16 +40,30 @@
       </div>
     </div>
   </section>
+} @else {
+  <section class="empty-state-card" [routerLink]="['/course-detail']">
+    <div class="empty-state-icon">
+      <i class="fa-solid fa-graduation-cap"></i>
+    </div>
+    <h2>Start Your First Course</h2>
+    <p>You haven't started learning yet. Explore our courses and begin your journey today!</p>
+    <button class="cl-resume-btn">
+      <i class="fa-solid fa-compass"></i> Explore Courses
+    </button>
+  </section>
+}
+
+
 
   <!-- Daily Goals -->
   <section class="section">
     <div class="section-header">
       <h3>Daily Goals</h3>
-      <a href="#" class="view-all-link">VIEW ALL</a>
+      <button class="view-all-link">VIEW ALL</button>
     </div>
 
     <div class="goals-grid">
-      @for (goal of dailyGoals; track goal.label) {
+  @for (goal of dailyGoals(); track goal.label){
         <div class="goal-card">
           <div class="goal-ring-wrapper">
             <svg class="goal-ring" viewBox="0 0 96 96">
