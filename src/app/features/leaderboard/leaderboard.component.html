@@ -33,13 +33,13 @@
 
   <!-- Ranked List -->
   <section class="ranked-list">
-    @for (person of rankedList; track person.id) {
+    @for (person of rankedList(); track person.id) {
       <div class="rank-row" [class.current-user]="person.isCurrentUser">
         <div class="rank-left">
           <span class="rank-number">{{ person.rank }}</span>
           <app-user-avatar [name]="person.name" [size]="48"></app-user-avatar>
           <div>
-            <p class="rank-name">{{ person.name }}</p>
+            <p class="rank-name">{{ person.displayName }}</p>
             <div class="rank-trend" [class]="'trend-' + person.trend">
               @if (person.trend === 'up') {
                 <i class="fa-solid fa-arrow-trend-up"></i>
