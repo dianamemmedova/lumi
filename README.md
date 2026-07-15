@@ -1,59 +1,97 @@
 # Lumi
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.24.
+Lumi is an [Angular](https://angular.dev/) application built with Angular CLI 19.2.24.
 
-## Development server
+## 🛠 Tech Stack
 
-To start a local development server, run:
+- **Framework:** Angular 19
+- **CLI:** Angular CLI 19.2.24
+- **Testing:** Karma (unit tests)
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (LTS recommended)
+- [Angular CLI](https://angular.dev/tools/cli) installed globally:
+  ```bash
+  npm install -g @angular/cli
+  ```
+
+### Installation
+
+```bash
+npm install
+```
+
+### Development server
+
+Start a local dev server:
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Then open [http://localhost:4200/](http://localhost:4200/) in your browser. The app reloads automatically on file changes.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+## 📦 Build
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Build artifacts are output to the `dist/` directory. Production builds are optimized by default.
 
-## Running unit tests
+## 🧩 Code Scaffolding
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Generate a new component:
+
+```bash
+ng generate component component-name
+```
+
+See all available schematics (components, directives, pipes, services, etc.):
+
+```bash
+ng generate --help
+```
+
+## ✅ Testing
+
+### Unit tests
 
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
+Runs unit tests via [Karma](https://karma-runner.github.io).
 
-For end-to-end (e2e) testing, run:
+### End-to-end tests
+
+Angular CLI doesn't ship with an e2e framework by default — pick one that fits your needs (e.g. Cypress, Playwright).
 
 ```bash
 ng e2e
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## 📁 Project Structure
 
-## Additional Resources
+```
+lumi/
+├── src/
+│   ├── app/          # Application source code
+│   ├── assets/       # Static assets
+│   └── environments/ # Environment configs
+├── angular.json
+├── package.json
+└── tsconfig.json
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 📚 Resources
+
+- [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli)
+- [Angular Documentation](https://angular.dev/)
+
+## 📄 License
+
+Specify your project's license here.
